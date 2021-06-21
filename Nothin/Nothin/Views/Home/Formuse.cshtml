@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "Formuse";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+<style>
+    .sidebar {
+        background-color: #e5cde7;
+        height: 6px;
+        width: 456px;
+        -webkit-transform: rotate(-90deg) translate(-275px,-230px);
+        border-radius: 11px;
+        position: absolute;
+    }
+
+        .sidebar:hover {
+            background-color: #071e22;
+        }
+        .sideButton:hover {
+            color: #071e22;
+        }
+</style>
+<body style="height:5000px">
+
+</body>
+ <div class='card sidebar position-sticky' id='cards'>
+     <div class='card-header' id='headingSide' style='background-color: #071e22' ; padding-bottom:0px>
+         <h4 class='mb-0' style='color:white;text-transform: uppercase;font-weight:bold; font-family:Roboto'>
+             <button class='btn fa fa-caret-down sideButton' style='color: white;' data-toggle='collapse' data-target='#collapseSide' aria-expanded='true' aria-controls='collapseSide'></button>
+             Word
+         </h4> 
+    </div> 
+    <div id= "collapseSide" class='collapse' aria-labelledby='headingSide'
+        <div class='card-body' style='background-color:#e6e6e6'>  
+            <div class="container ratio ratio-1x1" style="padding: 0px" >
+                <iframe src="/Home/Component" style="-webkit-transform:rotate(90deg);border: none; width: 100%; overflow:auto" height="449"></iframe>
+            </div>
+        </div> 
+    </div> 
+    
+</div>
+
+
+<!--
+<nav class="navbar navbar-expand-lg navbar-light sidebar btn" id="sidebar"></nav>
+-->
+
+<script>
+    function sidebarChange() {
+
+    }
+
+</script>
+

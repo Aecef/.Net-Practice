@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "QuotePage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="row">
+    <div class="container-fluid col">
+        <iframe src="/Quote/Form" id="cool-frame" style="height:1920px; width: 630px; overflow:auto ; border:none" scrolling="no"></iframe>
+    </div>
+    <div class="col">
+        <div class="btn btn-primary" id="cool-btn" onclick="cool()">COOL</div>
+        <label class="display-4 " id="monthly-cost-a" style="font-size:150%">Assaasc</label>
+    </div>
+</div>
+
+
+<script>
+    function cool() {
+        var iframe = document.getElementById('cool-frame');
+        var innerDoc = iframe.contentWindow.document.getElementById('monthly-cost-1').innerHTML;
+        document.getElementById('monthly-cost-a').innerHTML = innerDoc;
+    }
+</script>

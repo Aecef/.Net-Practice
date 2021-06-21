@@ -1,0 +1,249 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<!--
+Color Pallette
+    Dark Jungle Green : #071E22
+    Myrtle Green : #1D7874
+    Wintergreen Dream: #679289
+    Peach Crayola : #F4C095
+    Red Pigment : #EE2E31
+
+    #071e22
+    #e5cde7
+
+
+-->
+
+<style>
+    #BackSquare {
+        background-position: center;
+        width: 100%;
+        height: 17rem;
+        border: 40px;
+        border-color: white;
+        box-sizing: border-box;
+        padding: 15px;
+        margin-top: 32px;
+    }
+
+    #MiddleSquare {
+        width: 100%;
+        height: 15rem;
+        border: 40px;
+        border-color: white;
+        box-sizing: border-box;
+        padding: 15px;
+    }
+
+    #FrontSquare {
+        width: 100%;
+        height: 13rem;
+        border: 40px;
+        border-color: white;
+        box-sizing: border-box;
+        padding: 0px
+    }
+    .text-block {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        color: white;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    #any_word {
+        color: white;
+        font-size: 200px;
+        top: 800px;
+        left: 32px;
+        font-family: ChunkFive;
+    }
+
+    .globe {
+        color: white;
+        font-size: 50vw;
+        top: 750px;
+        width: 100%;
+        height: auto;
+       
+    }
+
+    .image-across {
+        color: white;
+        width: 100%;
+        height: auto;
+    }
+
+    .globe-words {
+        color: white;
+        font-size: 8vw;
+        top: 750px;
+        width: 100%;
+        height: auto;
+        max-width: 750px;
+        font-family: ChunkFive;
+        right: 914px;
+    }
+    #always {
+        font-family: Roboto
+    }
+    .title-image {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../Assests/Images/urban_footer_centered.jpg");
+        height: 600px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+    }
+</style>
+
+<script>
+    function prepareWord() {
+        $.get("/api/urbanword", function (data) {
+            localStorage.setItem('word', data.Word);
+            localStorage.setItem('desc', data.Definition);
+        })
+    }
+
+    function displayWord() {
+        let word = localStorage.getItem('word');
+        let desc = localStorage.getItem('desc');
+        document.getElementById("word").innerHTML = word;
+        document.getElementById("desc").innerHTML = desc;
+        prepareWord();
+    }
+</script>
+
+<div class="col-2 float-left" style="padding-top:32px; width: 330px ; height:554px">
+    <div class="card text-white mb-3 " style="background-color: #071e22;width:350px;height:518px; max-width: 25rem; padding-left: 16px; padding-right: 0px">
+        <div class="card-header" style="background-color: #071e22; ">Header</div>
+        <div class="card-body" style="background-color: rgb(229, 205, 231,.9)">
+            <h4 class="card-title" style="color: #071e22">Primary card title</h4>
+            <p class="card-text" style="color: #071e22">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+    </div>
+</div>
+<div class="col-2 float-right" style="padding-top:32px; width: 330px ; height:554px">
+    <div class="card text-white mb-3 " style="background-color: #071e22;width:350px;height:518px; max-width: 25rem;right:65px ;padding-left: 0px; padding-right: 16px">
+        <div class="card-header" style="background-color: #071e22; ">Header</div>
+        <div class="card-body" style="background-color: #e5cde7">
+            <h4 class="card-title" style="color: #071e22">Primary card title</h4>
+            <p class="card-text" style="color: #071e22">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+    </div>
+</div>
+
+
+<div class="container body-content">
+    <div class="jumbotron " style="background-color: #071e22 " id="BackSquare">
+        <div class="jumbotron" style="background-color: #e5cde7" id="MiddleSquare">
+            <div class="jumbotron" style="background-color: #071e22 " id="FrontSquare">
+                <h1 class="display-3" id="always" style="padding-top: 36px; padding-left: 26px; font-size: 7rem; color: #e5cde7">Dictionary</h1>
+                <hr class="my-4" style="border-color: #e5cde7">
+                <p class="lead">
+
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="wordAlert" tabindex="-1" role="dialog" aria-labelledby="wordAlert" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Warning</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    This Word Is from Urban Dictionary And May Contain Sensitive Material
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" style="font-family:Roboto" onclick="displayWord()" data-dismiss="modal">Continue</button>
+                    <button type="button" class="btn btn-primary" style="font-family:Roboto" data-dismiss="modal">Nevermind</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3 d-flex justify-content-center" style="background-color: #e5cde7 ">
+        <h3 class="card-header d-flex justify-content-center" id="word" style="background-color: #071e22; color: #e5cde7 ">WORD</h3>
+        <div class="card-body" style="background-color:#a58fbd">
+            <h5 class="card-title d-flex justify-content-center" style="font-family: Roboto; font-size: .9rem" id="desc">DEFINITION</h5>
+        </div>
+    </div>
+
+
+    <a class="btn btn-primary d-flex justify-content-center" style="background-color: #071e22; font-family: Roboto; color: white;" role="button" data-toggle="modal" data-target="#wordAlert">Get Word</a>
+    <br>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+    <script language="JavaScript" type="text/javascript" src="~/Scripts/jquery-3.6.0.js"></script>
+</div>
+<div>
+    <div class="container-fluid d-flex justify-content-center" style="padding-left: 0px; padding-right: 0px">
+        <img class="justify-content-center image-across" src="~/Assests/Images/urban_footer.jpg" alt="Urban Landscape" />
+        <span class="text-block fa fa-globe d-flex justify-content-md-end globe"></span>
+        <div class="text-block d-flex globe-words">Any Word <br> Out There</div>
+    </div>
+</div>
+<style>
+
+    .shrink{
+        height:auto;
+        width:inherit;
+    }
+</style>
+
+<div style="padding-top:6px; bottom:1000px" >
+    <img class="image-across d-flex float-md-right" style="min-height: 960px; height: auto;width:50%; padding-left:3px;" src="~/Assests/Images/tkyo-street.jpg">
+    <div style="background-color: rgb(7, 30, 34,.1); min-height: 960px; height:auto; width: 50%; padding-right: 50px; padding-left: 50px;">
+        <strong><h1 class="d-flex justify-content-center" style="font-family:Roboto; padding:50px">Words In The City</strong></h1>
+        <div class="shrink" ; style="font-family:Roboto; width:100%">
+            <p>
+                <span class="tab"></span>
+                In linguistics, a word of a spoken language can be defined as the smallest sequence of phonemes that
+                can be uttered in isolation with objective or practical meaning. In many languages, words also correspond
+                to sequences of graphemes ("letters") in their standard writing systems that are delimited by spaces wider than the
+                normal inter-letter space, or by other graphical conventions.[1] The concept of "word" is usually distinguished from that of a
+                morpheme, which is the smallest unit of word which has a meaning, even if it will not stand on its own.
+            </p>
+            <p>
+                <span class="tab"></span>
+                In many languages, the notion of what constitutes a "word" may be mostly learned as part of learning the writing system.
+                [1] This is the case for the English language, and for most languages that are written with alphabets derived from the ancient Latin or Greek alphabets.
+            </p>
+            <p>
+                <span class="tab"></span>
+                There still remains no consensus among linguists about the proper definition of "word" in a spoken language that is independent of its writing system,
+                nor about the precise distinction between it and "morpheme".[1] This issue is particularly debated for Chinese and other languages of East Asia,[2] and
+                may be moot[clarification needed] for Afro-Asiatic languages.
+            </p>
+            <p>
+                <span class="tab"></span>
+                In English orthography, the letter sequences "rock", "god", "write", "with", "the", "not" are considered to be single-morpheme words, whereas "rocks",
+                "ungodliness", "typewriter", and "cannot" are words composed of two or more morphemes ("rock"+"s", "un"+"god"+"li"+"ness", "type"+"writ"+"er", and "can"+"not").
+                In English and many other languages, the morphemes that make up a word generally include at least one root (such as "rock", "god", "type", "writ", "can", "not")
+                and possibly some affixes ("-s", "un-", "-ly", "-ness"). Words with more than one root ("[type][writ]er", "[cow][boy]s", "[tele][graph]ically") are called compound
+                words. Words are combined to form other elements of language, such as phrases ("a red rock", "put up with"), clauses ("I threw a rock"), and sentences ("I threw a rock, but missed")
+            </p>
+        </div> <!--Paragraph of words def-->
+    </div>
+</div>
+
+
+<div>
+    <div class="container-fluid d-flex justify-content-center image-container title-image">
+        <span class="fa fa-globe d-flex justify-content-md-end globe"></span>
+        <div class="d-flex globe-words">Any Word <br> Out There</div>
+    </div>
+</div>
+

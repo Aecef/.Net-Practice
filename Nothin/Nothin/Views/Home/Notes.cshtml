@@ -1,0 +1,110 @@
+﻿
+@{
+    ViewBag.Title = "Notes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="~/Scripts/Stylesheets/index.css" />
+<script src="~/Scripts/src/words.js"></script>
+
+
+<div class="modal fade" id="wordAlert" tabindex="-1" role="dialog" aria-labelledby="wordAlert" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Warning</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align:center">
+                This Word Is from Urban Dictionary And May Contain Sensitive Material
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" style="font-family:Roboto" onclick="displayWord()" data-dismiss="modal">Continue</button>
+                <button type="button" class="btn btn-primary" style="font-family:Roboto" data-dismiss="modal">Nevermind</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="title-image">
+    <div class="title-text">
+        <h1 style="font-size: 100px; font-family:Roboto">
+            Every Word
+            <br />
+            Out There
+        </h1>
+        <p>and a little more</p>
+    </div>
+</div>
+
+<div class="container" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-lg-4 col-sm-6" style="text-align:center">
+            <i class="fa fa-5x fa-heartbeat"></i>
+            <h4>Words Heal</h4>
+            <p>
+                Words heal the soul and ward off demons, but will not cure diseases, or restore
+                strength or health. They might be better prepared to handle a world with only the smallest
+                of problems, but others will certainly be willing.
+            </p>
+        </div>
+        <div class="col-lg-4 col-sm-6" style="text-align:center">
+            <i class="fa fa-globe fa-5x"></i>
+            <h3 class="d-flex justify-content-center"><b>Words Are The World</b></h3>
+            <p style="text-align: center">
+                Words are the beginning of the planet; no one can see it. And people have tried to
+                get more away from it, but there is no end to it. This, and so far everything that has
+                come and gone should be done away with.
+            </p>
+        </div>
+        <div class="col-lg-4 col-sm-6" style="text-align:center">
+            <i class="fa fa-flask fa-5x"></i>
+            <h4>Words Measure</h4>
+            <p>
+                Words are the measure of our creativity and we do not need to think about the definition
+                any more than we need to think about the definition of a certain kind of person.
+            </p>
+        </div>
+    </div>
+
+    <div class="container" style="margin-top: 4rem; max-width: 1250px">
+        <article class="mw9 center relative">
+            <div class="br3 pa6 bg-fa-navy" style="color:white; position: relative; z-index:1; margin-left: 6rem; margin-right: 6rem ">
+                <div style="color:white">
+                    <div>
+                        <h2 id="word" style="text-transform: uppercase; font-weight: bold">
+                            Word
+                        </h2>
+                        <a class="btn btn-primary wordButton" style="font-family: Roboto; margin-top: 0px;border-color:white" value="Submit" onclick="allDef()">All Def</a>
+                    </div>
+                        <hr class="my-4" style="border-color: white">
+                        <h4 id="desc">Definition</h4>
+                    </div>
+                <div class="form-group center" style="margin-bottom:10px">
+                    <input class="form-control form-control-lg " type="text" placeholder="Search" id="urbanSearch" style="margin-top: 4rem; margin-bottom: 10px">
+                    <div class="invalid-feedback" id="urbanSearchFeedback" style="margin-top: 0px; margin-bottom:10px; font-family:Roboto"></div>
+                    <div class="btn btn-primary wordButton" id="searchUB" style="font-family: Roboto; margin-top: 0px;border-color:white" value="Submit" onclick="getWord(document.getElementById('urbanSearch').value)">Search</div>
+                </div>
+                <a class="btn btn-primary wordButton" style="border-color:white;margin-top: 0px; font-family: Roboto;" role="button" data-toggle="modal" data-target="#wordAlert">Random Word</a>
+            </div>
+        </article>
+    </div>
+</div>
+
+<script>
+
+    document.getElementById("urbanSearch").addEventListener('keypress', function (event) {
+        if (event.keyCode == 13) {
+            document.getElementById("searchUB").click();
+        }
+    })
+    function allDef() {
+        var loc = document.getElementById('word').innerHTML;
+        if (loc != null) {
+            window.location.href = "/Home/Full/" + loc;
+        }
+    }
+</script>
+

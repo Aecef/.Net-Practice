@@ -1,0 +1,67 @@
+﻿.section-tout {
+    padding: 6em 0 1em;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    background-color: #eaf1f1;
+    text-align: center;
+}
+
+.title-text {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: white;
+}
+
+.title-image {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../Assests/Images/urban_footer_centered.jpg");
+    height: 600px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.center {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.relative {
+    position: relative;
+}
+
+.mw9 {
+    max-width: 95.36743rem;
+}
+
+.br3 {
+    border-radius: 2.5rem;
+}
+
+.pa6 {
+    padding: 6rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+.bg-fa-navy {
+    background-color: #071e22;
+}
+
+.wordButton:hover {
+    background-color: #e5cde7;
+    color: #071e22;
+}
+.wordButton:active {
+    background-color: #071e22;
+    color: white;
+}
+
+.wordButton {
+    background-color: #071e22;
+    color: white;
+}
+
+

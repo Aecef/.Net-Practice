@@ -1,0 +1,321 @@
+﻿
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_LayoutNoNav.cshtml";
+
+}
+<link rel="stylesheet" href="~/Scripts/Stylesheets/quote-content.css" />
+
+
+<div class="p-0 wide">
+    <h1 class="display-4" style="text-align:center">Services</h1>
+    <!--Services Icon Buttons-->
+    <div class="row justify-content-center">
+        <div class="btn col-lg-2 col-sm-3 services " style="text-align:center; border:10px;border-color:black ;" onclick="addQuote('Cloud')">
+            <i class="fa fa-3x fa-cloud"></i>
+            <h6>Cloud</h6>
+        </div>
+        <div class="btn services col-lg-2 col-sm-3" style="text-align:center" onclick="addQuote('Hardware')">
+            <i class="fa fa-3x fa-laptop"></i>
+            <h6>Hardware</h6>
+        </div>
+        <div class="btn services col-lg-2 col-sm-3" style="text-align:center" onclick="addQuote('Software')">
+            <i class="fa fa-3x fa-gears"></i>
+            <h6>Software</h6>
+        </div>
+    </div>
+    <!---->
+    <hr style="width:100%;" />
+    <!--Expandable Collapsable Buttons-->
+    <div class="container" style="margin-top: 20px">
+        <div class="row justify-content-end">
+            <div class="col-lg-1 col-sm-6" style="text-align:right">
+                <i class="btn fa fa-3x fa-expand toggle" onclick="$('.open-all').collapse('show')" alt="Expand All"></i>
+                <span class="tooltip">Expand All</span>
+            </div>
+            <div class="col-lg-1 col-sm-6" style="text-align:left">
+                <i class="btn fa fa-3x fa-compress toggle" onclick="$('.open-all').collapse('hide')" alt="Collapse All"></i>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="justify-content-center" style="text-align:center">
+                <span class="display-4" id="q-counter">0</span>
+            </div>
+        </div>
+    </div>
+    <!---->
+    <!--The contatiner for the card quotes that is appended to-->
+    <div id="user-quotes" style="height: 3000px; overflow: scroll">
+        <div class="container" id="accordion" style="margin-top: 20px; padding-bottom:1255px">
+            <!--Testing Area-->
+            <!--End Of Testing-->
+        </div>
+    </div>
+    <!---->
+</div>
+
+<!--Alert For Deleting the Quote-->
+<div class="modal fade" id="wordAlert" tabindex="-1" role="dialog" aria-labelledby="wordAlert" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Warning</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align:center">
+                ARE YOU SURE YOU WANT TO DELETE THE QUOTE
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" style="font-family:Roboto" onclick="modalDelete()" data-dismiss="modal">Delete</button>
+                <button type="button" class="btn btn-primary" style="font-family:Roboto" data-dismiss="modal">Nevermind</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!---->
+
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+<script>
+    var quoteAmount = 0;
+    var quoteNumber = 0;
+    function addQuote(type) {
+        quoteAmount += 1;
+        quoteNumber += 1;
+        quoteAmountChange();
+        document.getElementById('accordion').innerHTML += "" +
+            "<div class='card' id='card" + quoteNumber + "'>" +
+            "    <div class='card-header' id='heading" + quoteNumber + "' style='background-color: #071e22; padding-bottom:0px; padding-top:8px; max-height:40px'>" +
+            "        <h4 class='mb-0' style='color:white;text-transform: uppercase;font-weight:bold; font-family:Roboto; height:auto;font-size:inherit'>                                                         " +
+            "            <button class='btn fa fa-caret-down' style='color: white;' data-toggle='collapse' data-target='#collapse" + quoteNumber + "' aria-expanded='true' aria-controls='collapseOne'></button>     " +
+            "            " + type + "                                                                                                                                                                                    " +
+            "            <div style='font-size: 1em;float:right ; font-weight: bolder;color:#f3f3f394'>                                                                                                          " +
+            "                <i class='btn fa fa-trash' style='color:red' onclick='setDelete(" + quoteNumber + ")' data-toggle='modal' data-target='#wordAlert'></i>                                               " +
+            "                " + quoteNumber + "                                                                                                                                                                 " +
+            "            </div>                                                                                                                                                                                  " +
+            "        </h4>                                                                                                                                                                                       " +
+            "    </div>                                                                                                                                                                                          " +
+            "    <div id='collapse" + quoteNumber + "' class='collapse open-all show' aria-labelledby='heading" + quoteNumber + "'>                                                                               " +
+            "        <div class='card-body' style='background-color:#e6e6e6'>                                                                                                                                    " +
+            "            <form-group>                                                                                                                                                                            " +
+            "                <h4>                                                                                                                                                                                " +
+            "                    <strong>Add Line Item</strong>                                                                                                                                                  " +
+            "                </h4>                                                                                                                                                                               " +
+            "                <hr stye='width:100%;' />                                                                                                                                                           " +
+            "                <div class='row'>                                                                                                                                                                   " +
+            "                    <div class='col' style='margin-left:1.3%'>                                                                                                                                      " +
+            "                        <label class='form-font row'>Sub Offering</label>                                                                                                                           " +
+            "                        <div class='row' style='margin-bottom:5%'>                                                                                                                                  " +
+            "                            <select class='custom-select text-box col' id='inputGroupSelect" + quoteNumber + "'>                                                                                    " +
+            "                                <option selected>Sub Offerings...</option>                                                                                                                          " +
+            "                                <option value='1'>Voice & Colloboration</option>                                                                                                                    " +
+            "                                <option value='2'>Server Storage</option>                                                                                                                           " +
+            "                                <option value='3'>Customer Service</option>                                                                                                                         " +
+            "                                <option value='4'>Other Things</option>                                                                                                                             " +
+            "                                <option value='5'>And Stuff</option>                                                                                                                                " +
+            "                            </select>                                                                                                                                                               " +
+            "                        </div>                                                                                                                                                                      " +
+            "                        <div class='row'>                                                                                                                                                           " +
+            "                            <label class='form-font col' style='padding:0px'>Service Type</label>                                                                                                   " +
+            "                            <label class='form-font col offset-1'>Quantity</label>                                                                                                                  " +
+            "                        </div>                                                                                                                                                                      " +
+            "                        <div class='row' style='margin-bottom:5%'>                                                                                                                                  " +
+            "                            <input type='text' class='form-control text-box col' placeholder='Service Type' name='servicetypetId" + quoteNumber + "' id='servicetypeId" + quoteNumber + "'>          " +
+            "                            <input type='text' class='form-control text-box col offset-1' placeholder='0' name='quantity-" + quoteNumber + "' id='quantity-" + quoteNumber + "' oninput='updateMonthly(" + quoteNumber + ")'>" +
+            "                        </div>                                                                                                                                                                      " +
+            "                        <label class='form-font row'>Sub Offering</label>                                                                                                                           " +
+            "                        <div class='row' style='margin-bottom:5%'>                                                                                                                                  " +
+            "                            <select class='custom-select text-box col' id='inputGroupSelect" + quoteNumber + "'>                                                                                    " +
+            "                                <option selected>per device</option>                                                                                                                                " +
+            "                                <option value='1'>per device</option>                                                                                                                               " +
+            "                                <option value='2'>per person</option>                                                                                                                               " +
+            "                                <option value='3'>per year</option>                                                                                                                                 " +
+            "                                <option value='4'>Other Things</option>                                                                                                                             " +
+            "                                <option value='5'>And Stuff</option>                                                                                                                                " +
+            "                            </select>                                                                                                                                                               " +
+            "                        </div>                                                                                                                                                                      " +
+            "                    </div>                                                                                                                                                                          " +
+            "                                                                                                                                                                                                    " +
+            "                                                                                                                                                                                                    " +
+            "                                                                                                                                                                                                    " +
+            "                    <div class='col offset-1' style='margin-right:1.3%'>                                                                                                                            " +
+            "                        <label class='form-font row'>Products</label>                                                                                                                               " +
+            "                        <div class='row'>                                                                                                                                                           " +
+            "                            <select class='custom-select text-box col ' id='inputGroupSelect" + quoteNumber + "'>                                                                                    " +
+            "                                <option selected>Products...</option>                                                                                                                               " +
+            "                                <option value='1'>Voice & Colloboration</option>                                                                                                                    " +
+            "                                <option value='2'>Server Storage</option>                                                                                                                           " +
+            "                                <option value='3'>Customer Service</option>                                                                                                                         " +
+            "                                <option value='4'>Other Things</option>                                                                                                                             " +
+            "                                <option value='5'>And Stuff</option>                                                                                                                                " +
+            "                            </select>                                                                                                                                                               " +
+            "                        </div>                                                                                                                                                                      " +
+            "                    </div>                                                                                                                                                                          " +
+            "                </div>                                                                                                                                                                              " +
+            "                <hr stye='width:100%;' />                                                                                                                                                           " +
+            "                                                                                                                                                                                                    " +
+            "<div class='row'>                                                                                   " +
+            "    <select class='custom-select form-font col' style='margin-left:1.3%'>                           " +
+            "        <option selected># OF Devices...</option>                                                   " +
+            "        <option value='1'>10</option>                                                               " +
+            "        <option value='2'>15</option>                                                               " +
+            "        <option value='3'>20</option>                                                               " +
+            "        <option value='4'>25</option>                                                               " +
+            "        <option value='5'>30</option>                                                               " +
+            "        <option value='6'>35</option>                                                               " +
+            "    </select>                                                                                       " +
+            "    <div class='col offset-1'>                                                                      " +
+            "        <label class='display-4 row' id='upfront-cost-" + quoteNumber + "' style='font-size:150%'>Upfront: $0</label>" +
+            "        <label class='display-4 row' id='monthly-cost-" + quoteNumber + "' style='font-size:150%'>Monthly: $0</label>" +
+            "    </div>                                                                                          " +
+            "                                                                                                    " +
+            "</div>                                                                                              " +
+            "               <hr stye='width:100%;' />                                                                                                                             " +
+            "                                                                                                                                                                     " +
+            "               <div class='row justify-content-end'>                                                                                                                 " +
+            "                   <div class='col-7 d-flex justify-content-end'>                                                                                                    " +
+            "                       <div class='btn btn-primary text-box btn-form' style='font-size:75%; text-align:center' onclick='updateMonthly('id')'>Get Approval</div>      " +
+            "                       <div class='btn btn-primary text-box btn-form' style='font-size:75%; text-align:center'>Finalize</div>                                        " +
+            "                   </div>                                                                                                                                            " +
+            "               </div>                                                                                                                                                " +
+            "                                                                                                                                                                     " +
+            "            </form-group>                                                                                                                                            " +
+            "        </div>                                                                                                                                                       " +
+            "    </div>                                                                                                                                                           " +
+            "</div>                                                                                                                                                               ";
+    }
+</script>
+<script src="~/Scripts/src/forms.js"></script>
+
+<!--
+            <div class='card' id='card1'>
+                <div class='card-header' id='heading1' style='background-color: #071e22; padding-bottom:0px; padding-top:8px; max-height:40px'>
+                    <h4 class='mb-0' style='color:white;text-transform: uppercase;font-weight:bold; font-family:Roboto; height:auto;font-size:inherit'>
+                        <button class='btn fa fa-caret-down' style='color: white;' data-toggle='collapse' data-target='#collapse1' aria-expanded='true' aria-controls='collapseOne'></button>
+                        type
+                        <div style='font-size: 1em;float:right ; font-weight: bolder;color:#f3f3f394'>
+                            <i class='btn fa fa-trash' style='color:red' onclick='setDelete(1)' data-toggle='modal' data-target='#wordAlert'></i>
+                            1
+                        </div>
+                    </h4>
+                </div>
+                <div id='collapse1' class='collapse open-all show' aria-labelledby='heading1'>
+                    <div class='card-body' style='background-color:#e6e6e6'>
+                        <form-group>
+                            <h4>
+                                <strong>Add Line Item</strong>
+                            </h4>
+                            <hr stye='width:100%;' />
+                            <div class="row">
+                                <div class="col" style="margin-left:1.3%">
+                                    <label class="form-font row">Sub Offering</label>
+                                    <div class="row" style="margin-bottom:5%">
+                                        <select class="custom-select text-box col" id="inputGroupSelect1">
+                                            <option selected>Sub Offerings...</option>
+                                            <option value='1'>Voice & Colloboration</option>
+                                            <option value='2'>Server Storage</option>
+                                            <option value='3'>Customer Service</option>
+                                            <option value='4'>Other Things</option>
+                                            <option value='5'>And Stuff</option>
+                                        </select>
+                                    </div>
+                                    <div class="row">
+                                        <label class="form-font col" style="padding:0px">Service Type</label>
+                                        <label class="form-font col offset-1">Quantity</label>
+                                    </div>
+                                    <div class="row" style="margin-bottom:5%">
+                                        <input type='text' class='form-control text-box col' placeholder='Service Type' name='servicetypetId' id='servicetypeId'>
+                                        <input type='text' class='form-control text-box col offset-1' placeholder='0' name='quantity-id' id='quantity-id' oninput="updateMonthly('id')">
+                                    </div>
+                                    <label class="form-font row">Sub Offering</label>
+                                    <div class="row" style="margin-bottom:5%">
+                                        <select class="custom-select text-box col" id="inputGroupSelect1">
+                                            <option selected>per device</option>
+                                            <option value='1'>per device</option>
+                                            <option value='2'>per person</option>
+                                            <option value='3'>per year</option>
+                                            <option value='4'>Other Things</option>
+                                            <option value='5'>And Stuff</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col offset-1" style="margin-right:1.3%">
+                                    <label class="form-font row">Products</label>
+                                    <div class="row">
+                                        <select class="custom-select text-box col " id="inputGroupSelect1">
+                                            <option selected>Products...</option>
+                                            <option value='1'>Voice & Colloboration</option>
+                                            <option value='2'>Server Storage</option>
+                                            <option value='3'>Customer Service</option>
+                                            <option value='4'>Other Things</option>
+                                            <option value='5'>And Stuff</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+                            <hr stye='width:100%;' />
+                            <div class="row">
+                                <select class="custom-select form-font col" style="margin-left:1.3%">
+                                    <option selected># OF Devices...</option>
+                                    <option value='1'>10</option>
+                                    <option value='2'>15</option>
+                                    <option value='3'>20</option>
+                                    <option value='4'>25</option>
+                                    <option value='5'>30</option>
+                                    <option value='6'>35</option>
+                                </select>
+                                <div class="col offset-1">
+                                    <label class="display-4 row" id="upfront-cost-id" style="font-size:150%">Upfront: $0</label>
+                                    <label class="display-4 row" id="monthly-cost-id" style="font-size:150%">Monthly: $0</label>
+                                </div>
+
+                            </div>
+
+                            <hr stye='width:100%;' />
+
+                            <div class="row justify-content-end">
+                                <div class="col-7 d-flex justify-content-end">
+                                    <div class="btn btn-primary text-box btn-form" style="font-size:75%; text-align:center" onclick="updateMonthly('id')">Get Approval</div>
+                                    <div class="btn btn-primary text-box btn-form" style="font-size:75%; text-align:center">Finalize</div>
+                                </div>
+                            </div>
+
+                        </form-group>
+                    </div>
+                </div>
+            </div>
+-->
+<!--
+ document.getElementById('accordion').innerHTML += "<div class='card' id='card" + quoteNumber + "'>" +
+            "<div class='card-header' id='heading" + quoteNumber + "' style='background-color: #071e22; padding-bottom:0px; padding-top:8px; max-height:40px'><h4 class='mb-0' style='color:white;text-transform: uppercase;font-weight:bold; font-family:Roboto; height:auto;font-size:inherit'>" +
+            "   <button class='btn fa fa-caret-down' style='color: white;' data-toggle='collapse' data-target='#collapse" + quoteNumber + "' aria-expanded='true' aria-controls='collapseOne'></button>" +
+            "    " + type +
+            "   <div style='font-size: 1em;float:right ; font-weight: bolder;color:#f3f3f394'>" + "<i class='btn fa fa-trash' style='color:red' onclick='setDelete(" + quoteNumber + ")' data-toggle='modal' data-target='#wordAlert'></i>"
+            + quoteNumber + "</div>" +
+            "        </h4></div><div id='collapse" + quoteNumber + "' class='collapse open-all show' aria-labelledby='heading" + quoteNumber + "'>" +
+            "        <div class='card-body' style='background-color:#e6e6e6'>" +
+            "            <form-group>" +
+            "                <h3>" +
+            "                    <strong>Criteria</strong>" +
+            "                </h3>" +
+            "                <hr stye='width:100%;' />" +
+            "                <input type='text' class='form-control text-box' placeholder='Company Name' name='companyId' id='companyId" + quoteNumber + "'>" +
+            "                    <input type='text' class='form-control text-box' placeholder='Region' name='regiontId' id='regionId" + quoteNumber + "'>" +
+            "                        <input type='text' class='form-control text-box' placeholder='Budget' name='BudgetId' id='BudgetId" + quoteNumber + "'>" +
+            "                            <input type='text' class='form-control text-box' placeholder='Amount' name='amountId' id='amountId" + quoteNumber + "'>" +
+            "            </form-group>" +
+            "                <hr stye='width:100%;' />" +
+
+            "        </div>" +
+            "    </div>" +
+            "</div>";
+    -->

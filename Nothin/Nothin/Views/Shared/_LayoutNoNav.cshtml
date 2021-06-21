@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/src/words.js"></script>
+
+
+
+</head>
+<body style="padding-top:0px">
+    @RenderBody()
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+<script>
+    document.getElementById("searchOne").addEventListener('keypress', function (event) {
+        if (event.keyCode == 13) {
+            document.getElementById("searchButton").click();
+        }
+    })
+    function allDefWord(word) {           window.location.href = "/Home/Full/" + word;
+
+    }
+</script>

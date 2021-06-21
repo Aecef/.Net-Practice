@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "Full";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <link rel="stylesheet" href="~/Scripts/Stylesheets/index.css" />
+
+    <script src="~/Scripts/src/words.js"></script>
+
+
+</head>
+<style>
+    .toggle:hover {
+        color: #e5cde7;
+    }
+</style>
+
+<div class="container" id="word-holder"></div>
+<script>
+    function displayWordFullTwo(wordInput) {
+        $.post("/api/urbanword/" + wordInput + "/Full", function (data) {
+            var targets = "";
+            $.each(data, function (key, value) {
+                document.getElementById("accordion").innerHTML += "" +
+                    "<div class='card' id='cards' > " +
+                    "<div class='card-header' id = 'heading" + key + "' style = 'background-color: #071e22'; padding-bottom:0px>" +
+                    "<h4 class='mb-0' style='color:white;text-transform: uppercase;font-weight:bold; font-family:Roboto'>" +
+                    "<button class='btn fa fa-caret-down' style='color: white;' data-toggle='collapse' data-target='#collapse" + key + "' aria-expanded='true' aria-controls='collapseOne'></button>" +
+                    value.Word +
+                    "<div style='font-size: 1em;float:right ; font-weight: bolder;color:#f3f3f394'>" + (parseInt(key) + 1) + "</div> " +
+                    "</h4>" +
+                    "</div >" +
+                    "<div id='collapse" + key + "' class='collapse open-all' aria-labelledby='heading" + key + "' >" +
+                    "<div class='card-body' style='background-color:#e6e6e6'>" + value.Definition + "</div>" +
+                    "</div >" +
+                    " </div >";
+                targets += "#collapse" + key + ",";
+            })
+            document.getElementById('expandId').innerHTML = "<button class='btn fa fa-3x fa-expand' style='color: black;' data-toggle='collapse' data-target='" + targets + "' aria-expanded='true' aria-controls='collapseOne'></button>"
+
+            document.getElementById("collapse0").classList.add("show");
+
+        })
+    };
+
+
+    displayWordFullTwo('@ViewBag.word');
+</script>
+
+
+<div class="container" style="margin-top: 20px">
+    <div class="row justify-content-end">
+        <div class="col-lg-1 col-sm-6" style="text-align:right">
+            <i class="btn fa fa-3x fa-expand toggle" onclick="$('.open-all').addClass('show')"></i>
+        </div>
+        <div class="col-lg-1 col-sm-6" style="text-align:right">
+            <i class="btn fa fa-3x fa-compress toggle" onclick="$('.open-all').removeClass('show')"></i>
+        </div>
+    </div>
+</div>
+
+<!--Contains the Cards of the Word's def-->
+<div class="container all-cards" id="accordion" style="margin-top: 20px">
+
+</div>
+
+<div class="container-fluid" style="width:100%;height:1080px; align-content:center ;margin:0px; padding:15px">
+    <iframe id="word-image" src="https://www.bing.com" style="width:100%;height:1080px; align-items:center; display:block; border:none" scrolling="no"></iframe>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var loc = "https://www.bing.com/images/search?q=" + '@ViewBag.word';
+        $(document.getElementById("word-image")).attr('src', loc);
+    })
+    new Sortable(document.getElementById("accordion"), {
+        group: 'shared',
+        animation: 150,
+        ghostClass: 'bg-info'
+    })
+</script>
+
+

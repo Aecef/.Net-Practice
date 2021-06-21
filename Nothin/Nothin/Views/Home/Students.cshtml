@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "Students";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+    function getStudent(id) {
+        return $.get("/api/studentid/" + id, function (data) {
+                console.log(data[0].Age);
+
+                return data[0];
+            })
+    }
+
+    function displayStudent(id) {
+        document .getElementById("students").innerHTML = " ";
+        return $.get("/api/studentid/" + id, function (data) {
+                for (key in data[0]) {
+                    document.getElementById("students").innerHTML += ("<p style='font-family:Roboto'>" + key + ": " + data[0][key] + "</p>" );
+                }
+            })
+    }
+
+    function addClass(id, text) {
+        $.post("/api/student/" + id + "/change/" + text);
+        document.getElementById("StudentIdAdd").value = " ";
+        document.getElementById('StudentAddClass').value = " ";
+    }
+</script>
+<div class="container-fluid">
+    <div class="jumbotron" style="background-color:azure;">
+        <h1 class="display-3" id="always" style="font-family:Roboto"><i class="fa fa-user-circle "></i>Students</h1>
+        <hr class="my-4">
+        <p class="lead">
+            <a class="btn btn-primary btn-lg d-flex float-lg-right" href="/Home/Index" role="button">Home</a>
+        </p>
+    </div>
+
+    <div id="container1">
+        <div class="form-group">
+            <label class="col-form-label" for="inputDefault">Student</label>
+            <input type="text" class="form-control" placeholder="Student ID" name="StudentId" id="StudentId">
+            <div class="btn btn-secondary" value="Submit" onclick="displayStudent(document.getElementById('StudentId').value)">Get Student</div>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label" for="inputDefault">Student</label>
+            <input type="text" class="form-control" placeholder="Student ID" name="StudentIdAdd" id="StudentIdAdd">
+            <label class="col-form-label" for="inputDefault">Class</label>
+            <input type="text" class="form-control" placeholder="Add Class" name="StudentAddClass" id="StudentAddClass">
+            <div class="btn btn-secondary" value="Submit" onclick="addClass(document.getElementById('StudentIdAdd').value, document.getElementById('StudentAddClass').value)">Add</div>
+        </div>
+        <div id="students">
+
+        </div>
+
+    </div>
+</div>
+
