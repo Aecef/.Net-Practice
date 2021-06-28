@@ -27,7 +27,25 @@
         document.getElementById("StudentIdAdd").value = " ";
         document.getElementById('StudentAddClass').value = " ";
     }
+
+    function fillTable() {
+        $.get("/api/students/list", function (students) {
+            console.log(students[0]);
+            $.each(students, function (key,value) {
+                console.log(value);
+                document.getElementById('student-table').innerHTML += "" +
+                    "<tr>" +
+                    "   <th scope='row'>" + value['StudentId'] + "</th>" +
+                    "   <th>" + value['Name'] + "</th>" +
+                    "   <th>" + value['Age'] + "</th>" +
+                    "   <th>" + value['Hours'] + "</th>" +
+                    "</tr>";
+            })
+        })
+    }
+    document.onload(fillTable());
 </script>
+
 <div class="container-fluid">
     <div class="jumbotron" style="background-color:azure;">
         <h1 class="display-3" id="always" style="font-family:Roboto"><i class="fa fa-user-circle "></i>Students</h1>
@@ -36,6 +54,22 @@
             <a class="btn btn-primary btn-lg d-flex float-lg-right" href="/Home/Index" role="button">Home</a>
         </p>
     </div>
+
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Student ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Hours</th>
+                </tr>
+            </thead>
+            <tbody id="student-table">
+            </tbody>
+        </table>
+    </div>
+
 
     <div id="container1">
         <div class="form-group">
