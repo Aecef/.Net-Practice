@@ -23,9 +23,18 @@
     }
 
     function addClass(id, text) {
+        console.log(id);
+        console.log(text);
         $.post("/api/student/" + id + "/change/" + text);
         document.getElementById("StudentIdAdd").value = " ";
         document.getElementById('StudentAddClass').value = " ";
+    }
+
+    function addClassId(id, text) {
+        console.log(id);
+        console.log(text);
+        $.post("/api/student/" + id + "/change/" + text);
+        document.getElementById(id).value = " ";
     }
 
     function fillTable() {
@@ -39,6 +48,12 @@
                     "   <th>" + value['Name'] + "</th>" +
                     "   <th>" + value['Age'] + "</th>" +
                     "   <th>" + value['Hours'] + "</th>" +
+                    "   <th>" +
+                    "   <div class='form-group''>"+
+                    "       <input type='text' class='form-control' placeholder='Add Class' name='" + value['StudentId'] + "' id='" + value['StudentId'] + "'>" +
+                    "       <div class='btn btn-secondary' value='Submit' onclick=" + "\"addClassId(" + value['StudentId'] + ", document.getElementById('"+ value['StudentId'] +"').value)\">Add</div>" +
+                    "   </div>"
+                    "   </th>" +
                     "</tr>";
             })
         })
@@ -63,6 +78,7 @@
                     <th scope="col">Name</th>
                     <th scope="col">Age</th>
                     <th scope="col">Hours</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody id="student-table">
