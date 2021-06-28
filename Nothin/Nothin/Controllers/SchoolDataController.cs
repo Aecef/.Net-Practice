@@ -17,9 +17,12 @@ namespace Nothin.Controllers
     {
 
         public static IList<Student> students = new List<Student> {
-            new Student{StudentId = 1, Name = "Timmy", Age = 35, Hours = 15, Classes = new List<string>{ } },
-            new Student{StudentId = 2, Name = "Sarah", Age = 27, Hours = 15, Classes = new List<string>{ } },
-            new Student{StudentId = 3, Name = "Buck", Age = 80, Hours = 15, Classes = new List<string>{ } }
+            new Student{StudentId = 170579, Name = "Timmy", Age = 35, Hours = 15, Classes = new List<string>{ } },
+            new Student{StudentId = 170580, Name = "Sarah", Age = 27, Hours = 13, Classes = new List<string>{ } },
+            new Student{StudentId = 170581, Name = "Buck", Age = 80, Hours = 17, Classes = new List<string>{ } },
+            new Student{StudentId = 170582, Name = "Alec", Age = 22, Hours = 15, Classes = new List<string>{ } },
+            new Student{StudentId = 170583, Name = "Stanley", Age = 26, Hours = 13, Classes = new List<string>{ } },
+            new Student{StudentId = 170584, Name = "Mitchell", Age = 24, Hours = 17, Classes = new List<string>{ } }
         };
 
         public static int studentAmount = students.Count;
