@@ -180,6 +180,8 @@
   <ItemGroup>
     <Content Include="App_Data\header-logo.png" />
     <Content Include="App_Data\urban_footer.jpg" />
+    <Content Include="Assests\CHH\complogo.png" />
+    <Content Include="Assests\CHH\homepage.png" />
     <Content Include="Assests\Images\urban_footer_centered.jpg" />
     <Content Include="Assests\Images\tkyo-street.jpg" />
     <Content Include="Assests\Images\urban_footer.jpg" />
@@ -343,6 +345,7 @@
     <Content Include="Views\Quote\Form.cshtml" />
     <Content Include="Views\Quote\QuotePage.cshtml" />
     <Content Include="Views\HealthcareHome\Index.cshtml" />
+    <Content Include="Views\HealthcareHome\HowMayWeHelp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />

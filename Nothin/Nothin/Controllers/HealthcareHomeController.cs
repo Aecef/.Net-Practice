@@ -25,5 +25,9 @@ namespace Nothin.Controllers
         {
             return View();
         }
+        public ActionResult HowMayWeHelp()
+        {
+            return View();
+        }
     }
 }
