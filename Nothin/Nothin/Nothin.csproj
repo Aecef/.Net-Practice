@@ -166,6 +166,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\HealthcareHomeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\QuoteApiController.cs" />
     <Compile Include="Controllers\QuoteController.cs" />
@@ -341,6 +342,7 @@
     <Content Include="Views\Shared\_LayoutNoNav.cshtml" />
     <Content Include="Views\Quote\Form.cshtml" />
     <Content Include="Views\Quote\QuotePage.cshtml" />
+    <Content Include="Views\HealthcareHome\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
