@@ -4,31 +4,92 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container-fluid" style="font-weight: 500; color: #006600">
-    <div class="display-4">How May We Help?</div>
-    <form class="form-group" style="margin-top: 1%;">
-        <div class="row">
-            <div class="col-sm-3">
-                <label>Name</label>
-                <input class="form-control form-control-lg " type="text" placeholder="Enter Name Here" id="name-input" style=" margin-bottom: 10px">
-            </div>
-            <div class="col-sm-3">
-                <label>City</label>
-                <input class="form-control form-control-lg" type="text" placeholder="Enter City Here" id="city-input" style="margin-bottom: 10px" />
-            </div>
-        </div>
-        <div class="row">
-            <label class="col">Contact Preference</label>
-        </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <select class="custom-select text-box " id="email-or-phone-input">
-                    <option selected>Preferences</option>
-                    <option value='1'>Phone</option>
-                    <option value='2'>E-Mail</option>
-                </select>
-            </div>
+<script>
+    function validAge(age) {
+        if (age < 18 || age < 1) {
+            document.getElementById("age-input").classList.add("is-invalid");
+            document.getElementById("age-feedback").innerHTML = "Must Be 18 or Older";
+        }
+        else {
+            document.getElementById("age-input").classList.remove("is-invalid");
+            document.getElementById("age-feedback").innerHTML = "";
+        }
+    }
+</script>
+<style>
+    #back-texture {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../Assests/CHH/jj-ying.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+</style>
 
+<div class="container-fluid" id="back-texture" style="height:100%;">
+    <div class="row">
+        <div class="col">
+            <div class="container-fluid" style="font-weight: 500; color: #30ff5d; padding-bottom:60px">
+                <div class="display-4" style="color: #ffffff; font-weight:400">How May We Help?</div>
+                <hr />
+                <form class="form-group" style="margin-top: 1%;">
+                    <div class="row">
+                        <div class="col">
+                            <label>Name</label>
+                            <input class="form-control form-control-lg " type="text" placeholder="Enter Name Here" id="name-input" style=" margin-bottom: 10px">
+                        </div>
+                        <div class="col">
+                            <label>City</label>
+                            <input class="form-control form-control-lg" type="text" placeholder="Enter City Here" id="city-input" style="margin-bottom: 10px" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col">Contact Preference</label>
+                    </div>
+                    <div class="row" style="margin-bottom:10px">
+                        <div class="col">
+                            <select class="custom-select text-box " id="email-or-phone-input">
+                                <option selected>Preferences</option>
+                                <option value='1'>Phone</option>
+                                <option value='2'>E-Mail</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label>Phone #</label>
+                            <input class="form-control form-control-lg " type="text" placeholder="Enter Number Here" id="phone-input" style=" margin-bottom: 10px">
+                        </div>
+                        <div class="col">
+                            <label>E-mail</label>
+                            <input class="form-control form-control-lg " type="text" placeholder="Enter Email Here" id="email-input" style=" margin-bottom: 10px">
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom:10px">
+                        <div class="col">
+                            <label>Age</label>
+                            <input class="form-control form-control-lg " type="text" placeholder="Enter Age Here" id="age-input" onchange="validAge(document.getElementById('age-input').value)" style=" margin-bottom: 10px">
+                            <div class="invalid-feedback" id="age-feedback" style="margin-top: 0px; margin-bottom:10px; font-family:Roboto"></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <label class="col">Primary Insurance Coverage</label>
+                    </div>
+                    <div class="row" style="margin-bottom:10px">
+                        <div class="col">
+                            <select class="custom-select text-box " id="insurance-input">
+                                <option selected>Choose A Coverage</option>
+                                <option value='1'>Medicare</option>
+                                <option value='2'>Medicaid</option>
+                                <option value='3'>Private Insurance (PPO/HMO)</option>
+
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
-    </form>
+        <div class="col" style="margin-right:15px">
+            <img src="~/Assests/CHH/HowHelp.png" style="width:100%; height:auto;margin-top:10%;margin-right:15px; box-shadow:0px 0px 5px #000;min-height:200px;" />
+        </div>
+    </div>
 </div>

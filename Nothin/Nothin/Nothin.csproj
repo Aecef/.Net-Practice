@@ -182,6 +182,8 @@
     <Content Include="App_Data\urban_footer.jpg" />
     <Content Include="Assests\CHH\complogo.png" />
     <Content Include="Assests\CHH\homepage.png" />
+    <Content Include="Assests\CHH\HowHelp.png" />
+    <Content Include="Assests\CHH\jj-ying.jpg" />
     <Content Include="Assests\Images\urban_footer_centered.jpg" />
     <Content Include="Assests\Images\tkyo-street.jpg" />
     <Content Include="Assests\Images\urban_footer.jpg" />
